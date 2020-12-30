@@ -14,6 +14,50 @@
 
 extern uint8_t graphbmp[];
 
+// TomKeddie MG4860P PbSn profile        "NC-31 LOW-TEMP LF"
+static const profile mg4860p_profile = { "MG4860P PbSn",
+                                         // 0    10   20   30   40   50    60   70   80   90
+                                         {  32 , 35 , 50 , 65 , 80 , 95 , 110, 125, 140, 155,
+                                            155, 155, 165, 165, 165, 165, 165, 165, 170, 179,
+                                            189, 194, 205, 219, 225, 236, 236, 231, 223, 213,
+                                            192, 179, 157, 131, 110, 95 , 80 , 65 ,   0,   0,
+                                            0,   0,   0,   0,   0,   0,   0,   0,
+                                         }
+};
+
+// TomKeddie MG4900P SnAgCu profile
+static const profile mg4900p_profile = { "MG4900P SnAgCu",
+                                         // 0    10   20   30   40   50    60   70   80   90 
+                                         {  20 , 30 , 45 , 60 , 75 , 90 , 100, 107, 114, 120,
+                                            127, 134, 140, 145, 150, 150, 153, 157, 160, 165,
+                                            170, 175, 183, 190, 200, 210, 217, 225, 235, 245,
+                                            245, 235, 217, 210, 185, 162, 140, 100, 80 , 60 ,
+                                            0  , 0  , 0  , 0  , 0  , 0  ,   0,   0,
+                                         }
+};
+
+// TomKeddie MG4900P Xilinx SnAgCu profile
+static const profile mg4900pxi_profile = { "MG4900P SnAgCu XI",
+                                         // 0    10   20   30   40   50    60   70   80   90 
+                                         {  20 , 30 , 45 , 60 , 75 , 90 , 100, 107, 114, 120,
+                                            127, 134, 140, 145, 150, 150, 153, 157, 160, 165,
+                                            170, 175, 183, 190, 201, 212, 220, 229, 240, 250,
+                                            250, 240, 227. 217, 210, 185, 162, 140, 100, 80 ,
+                                            60 , 0  , 0  , 0  , 0  , 0  , 0  ,   0,
+                                         }
+};
+
+// TomKeddie TS391LT SnBiAg profile
+static const profile ts391lt_profile = { "TS391LT SnBiAg",
+                                         // 0    10   20   30   40   50    60   70   80   90 
+                                         {  25 , 32 , 39 , 47 , 54 , 62 ,  68,  77,  85,  90,
+                                            96 , 102, 107, 107, 107, 115, 120, 125, 130, 133,
+                                            136, 138, 148, 158, 165, 158, 148, 138, 120, 105,
+                                            90 , 70 , 50 , 25 , 0  , 0  , 0  , 0  , 0  , 0  ,
+                                            0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  ,
+                                         }
+};
+
 // Amtech 4300 63Sn/37Pb leaded profile
 static const profile am4300profile = {
 	"4300 63SN/37PB", {
@@ -70,7 +114,13 @@ static ramprofile ee1 = { "CUSTOM #1" };
 static ramprofile ee2 = { "CUSTOM #2" };
 
 static const profile* profiles[] = {
-	&syntechlfprofile,
+    &mg4860p_profile,
+    &mg4900p_profile,
+    &mg4900pxi_profile,
+    &ts391lt_profile,
+	(profile*) &ee1,
+	(profile*) &ee2,
+    &syntechlfprofile,
 	&nc31profile,
 	&am4300profile,
 #ifdef RAMPTEST
@@ -79,8 +129,6 @@ static const profile* profiles[] = {
 #ifdef PIDTEST
 	&pidcontrol_testprofile,
 #endif
-	(profile*) &ee1,
-	(profile*) &ee2
 };
 
 #define NUMPROFILES (sizeof(profiles) / sizeof(profiles[0]))
